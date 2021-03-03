@@ -24,10 +24,11 @@ class Command(BaseCommand):
 
         MeasuringInstrument.objects.all().delete()
         for instrument in instruments:
-            instrument_name = instrument["name"]
-            #Получаем категорию по имени
-            _typeofmeasurment = TypeOfMeasurment.objects.get(name=instrument_name)
-            #Заменяем название категории объектом
-            measuring_instrument['typeofmeasurment'] = _typeofmeasurment
+            type_name = instrument['typeofmeasurment']
+            #Получаем тип по имени
+            _typeofmeasurment = TypeOfMeasurment.objects.get(name=type_name)
+            # _typeofmeasurment = TypeOfMeasurment.objects.filter(name=type_name).first()
+            #Заменяем название типа объектом
+            instrument['typeofmeasurment'] = _typeofmeasurment
             new_measuring_instrument = MeasuringInstrument(**instrument)
             new_measuring_instrument.save()
